@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dash</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            font-size: 18px;
+            background-color: #ff3333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .dashboard-content {
+            display: flex;
+            gap: 20px;
+        }
+
+        .widget {
+            flex: 1;
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dashboard</h1>
+            <div class="timer" id="timer">You have 5 minutes until your session ends.</div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="widget">
+                <h2>User Info</h2>
+                <p>Username: <strong>Guest</strong></p>
+                <p>Status: <strong>Active</strong></p>
+            </div>
+            
+            <div class="widget">
+                <h2>System Stats</h2>
+                <p>CPU Usage: <strong>25%</strong></p>
+                <p>Memory Usage: <strong>3.5GB / 8GB</strong></p>
+            </div>
+        </div>
+        
+        <div class="dashboard-content" style="margin-top: 20px;">
+            <div class="widget">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#" style="color: #00bcd4;">Home</a></li>
+                    <li><a href="#" style="color: #00bcd4;">Profile</a></li>
+                    <li><a href="#" style="color: #00bcd4;">Settings</a></li>
+                </ul>
+            </div>
+            
+            <div class="widget">
+                <h2>Notifications</h2>
+                <p>No new notifications.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 5;
+        const timerElement = document.getElementById('timer');
+        
+        function updateTimer() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerElement.textContent = `You have ${minutes}:${seconds < 10 ? '0' : ''}${seconds} minutes until your session ends.`;
+            
+            if (timeLeft <= 0) {
+                window.location.href = "https://odbit.org/403forbidden";
+            } else {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            }
+        }
+        
+        updateTimer();
+    </script>
+</body>
+</html>
